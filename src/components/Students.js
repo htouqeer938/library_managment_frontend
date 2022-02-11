@@ -15,13 +15,7 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import axios from 'axios';
-import ApiURL from '../config';
 import { MainListItems } from './listItems';
-// import Chart from './Chart';
-// import Deposits from './Deposits';
-// import Orders from './Orders';
-import AddStudent from './AddStudentfrm';
 import StudentsList from './AllStudents';
 
 function Copyright(props) {
@@ -91,32 +85,6 @@ function StudentsContent() {
             setOpen(!open);
       };
 
-      const [studentdata, getdata] = React.useState([]);
-
-      React.useEffect(() => {
-            getAlldataStudent();
-      }, []);
-
-      const addStudent = ({ first_name, last_name }) => {
-
-            axios.post(`${ApiURL}/student`, {
-                  first_name,
-                  last_name
-            })
-                  .then(res => {
-                        console.log(res.data)
-                        getAlldataStudent()
-
-                  })
-      }
-
-      const getAlldataStudent = () => {
-            axios.get(`${ApiURL}/student`)
-                  .then(({ data }) => {
-                        getdata(data);
-                  })
-                  .catch(error => console.error(`Error`, error))
-      }
       return (
             <ThemeProvider theme={mdTheme}>
                   <Box sx={{ display: 'flex' }}>
@@ -188,17 +156,17 @@ function StudentsContent() {
                                     <Grid container spacing={3}>
 
 
-                                          <Grid item xs={12}>
+                                          {/* <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                                       <AddStudent formData={(data) => {
                                                             addStudent(data)
                                                       }} />
                                                 </Paper>
-                                          </Grid>
+                                          </Grid> */}
 
                                           <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                                      <StudentsList studentdata={studentdata} />
+                                                      <StudentsList />
                                                 </Paper>
                                           </Grid>
 

@@ -18,9 +18,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 
 import { MainListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import StudentsCount from './StudentsCount';
+import BooksCount from './BooksCount';
 
 function Copyright(props) {
   return (
@@ -158,7 +157,7 @@ function DashboardContent() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={4} lg={6} sm={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -167,11 +166,11 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <StudentsCount />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={6} sm={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -180,13 +179,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <BooksCount />
                 </Paper>
               </Grid>
             </Grid>

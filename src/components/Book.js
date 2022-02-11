@@ -15,10 +15,7 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import axios from 'axios';
-import ApiURL from '../config';
 import { MainListItems } from './listItems';
-import AddBook from './AddBookfrm';
 import BooksList from './AllBooks';
 
 function Copyright(props) {
@@ -88,39 +85,6 @@ function BooksContent() {
             setOpen(!open);
       };
 
-      const [Bookdata, getdata] = React.useState([]);
-
-      React.useEffect(() => {
-            getAlldataBook();
-      }, []);
-
-      const addBook = ({ book_name,
-            author,
-            borrowed_by_student,
-            date_of_borrow,
-            expected_date_return
-      }) => {
-            axios.post(`${ApiURL}/book`, {
-                  book_name,
-                  author,
-                  borrowed_by_student,
-                  date_of_borrow,
-                  expected_date_return
-            })
-                  .then(res => {
-                        console.log(res.data)
-                        getAlldataBook()
-
-                  })
-      }
-
-      const getAlldataBook = () => {
-            axios.get(`${ApiURL}/book`)
-                  .then(({ data }) => {
-                        getdata(data);
-                  })
-                  .catch(error => console.error(`Error`, error))
-      }
       return (
             <ThemeProvider theme={mdTheme}>
                   <Box sx={{ display: 'flex' }}>
@@ -192,17 +156,18 @@ function BooksContent() {
                                     <Grid container spacing={3}>
 
 
-                                          <Grid item xs={12}>
+                                          {/* <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                                       <AddBook formData={(data) => {
                                                             addBook(data)
                                                       }} />
                                                 </Paper>
-                                          </Grid>
+                                          </Grid> */}
+
 
                                           <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                                      <BooksList Bookdata={Bookdata} />
+                                                      <BooksList />
                                                 </Paper>
                                           </Grid>
 
