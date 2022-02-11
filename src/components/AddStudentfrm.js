@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup } from '@mui/material';
+import Title from "./Title";
 
 
 const AddStudent = ({ formData }) => {
@@ -26,6 +27,7 @@ const AddStudent = ({ formData }) => {
                   submit()
             }}>
                   <FormControl fullWidth>
+                        <Title>Add New Student</Title>
                         <FormGroup>
                               <Input required onChange={(e) => handle(e)} value={data.first_name} id="first_name" aria-describedby="first_name-text" />
                               <FormHelperText id="first_name-text">Enter first name.</FormHelperText>
@@ -35,7 +37,7 @@ const AddStudent = ({ formData }) => {
                               <FormHelperText id="last_name-text">Enter Last Name.</FormHelperText>
                         </FormGroup>
                         <FormGroup>
-                              <Button type="submit" variant="outlined">Add Student</Button>
+                              <Button type="submit" variant='contained'>Add Student</Button>
                         </FormGroup>
                   </FormControl>
             </form>

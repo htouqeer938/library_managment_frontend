@@ -134,9 +134,7 @@ function BooksContent() {
                               <Divider />
                               <List component="nav">
                                     {<MainListItems />}
-
                                     <Divider sx={{ my: 1 }} />
-                                    {/* {secondaryListItems} */}
                               </List>
                         </Drawer>
                         <Box
@@ -154,25 +152,11 @@ function BooksContent() {
                               <Toolbar />
                               <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                                     <Grid container spacing={3}>
-
-
-                                          {/* <Grid item xs={12}>
-                                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                                      <AddBook formData={(data) => {
-                                                            addBook(data)
-                                                      }} />
-                                                </Paper>
-                                          </Grid> */}
-
-
                                           <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                                       <BooksList />
                                                 </Paper>
                                           </Grid>
-
-
-
                                     </Grid>
                                     <Copyright sx={{ pt: 4 }} />
                               </Container>

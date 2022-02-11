@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup, Select, MenuItem } from '@mui/material';
 import axios from "axios";
 import ApiURL from "../config";
+import Title from "./Title";
 
 const AddBook = ({ formData }) => {
 
@@ -46,6 +47,7 @@ const AddBook = ({ formData }) => {
                   submit()
             }}>
                   <FormControl fullWidth>
+                        <Title>Add New Book</Title>
                         <FormGroup>
                               <Input onChange={(e) => handle(e)} value={data.book_name} name="book_name" aria-describedby="first_name-text" required />
                               <FormHelperText id="first_name-text">Enter book name</FormHelperText>
@@ -80,7 +82,7 @@ const AddBook = ({ formData }) => {
                               <FormHelperText id="first_name-text">Enter expected return Date</FormHelperText>
                         </FormGroup>
                         <FormGroup>
-                              <Button variant="outlined" type="submit">Add Book</Button>
+                              <Button variant='contained' type="submit">Add Book</Button>
                         </FormGroup>
                   </FormControl>
             </form>
