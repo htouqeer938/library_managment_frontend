@@ -10,16 +10,19 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { useHistory } from 'react-router-dom';
+export const MainListItems = () => {
+  const history = useHistory()
 
-export const mainListItems = (
-  < React.Fragment >
+  return (< React.Fragment >
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Dashboard" onClick={() => {
+        history.push("/")
+      }} />
     </ListItemButton>
-    <ListItemButton onClick={useHistory().push('/order')}>
+    <ListItemButton>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
@@ -44,7 +47,8 @@ export const mainListItems = (
       <ListItemText primary="Integrations" />
     </ListItemButton>
   </React.Fragment >
-);
+  )
+};
 
 export const secondaryListItems = (
   <React.Fragment>

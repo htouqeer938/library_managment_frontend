@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Components
-import Dashboard from "./dashboard/Dashboard";
-import AddStudent from './components/AddStudentfrm';
-import Orders from './dashboard/Orders';
+import Dashboard from "./components/Dashboard";
+import Students from './components/Students';
+import Books from './components/Book';
 
 const Routes = () => {
       return (
@@ -12,9 +12,8 @@ const Routes = () => {
                   <Router>
                         <Switch>
                               <Route exact path={"/"} component={Dashboard} />
-                              <Route exact path={"/addstudent"} component={AddStudent} />
-                              <Route exact path={"/order"} component={Orders} />
-
+                              <Route exact path={"/students"} component={Students} />
+                              <Route exact path={"/books"} component={Books} />
                         </Switch>
                   </Router>
             </div>

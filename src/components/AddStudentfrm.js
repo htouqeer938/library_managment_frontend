@@ -1,32 +1,24 @@
 import React, { useState } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup } from '@mui/material';
-import axios from 'axios';
-import ApiURL from "../config";
 
 
-const AddStudent = () => {
+const AddStudent = ({ formData }) => {
 
       const [data, setData] = useState({
             first_name: "",
             last_name: ""
       })
-      const url = `${ApiURL}/student`
+
       function submit(e) {
-            axios.post(url, {
-                  first_name: data.first_name,
-                  last_name: data.last_name
-            })
-                  .then(res => {
-                        console.log(res.data)
-                  })
+            formData(data);
       }
 
       function handle(e) {
             const newdata = { ...data }
             newdata[e.target.id] = e.target.value
             setData(newdata)
-            console.log(newdata)
       }
+
 
       return (
             <FormControl>
