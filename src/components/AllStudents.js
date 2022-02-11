@@ -40,6 +40,9 @@ export default function StudentsList() {
             getAlldataStudent();
       }, []);
 
+      const clearstate = () => getdata([])
+
+
       const addStudent = ({ first_name, last_name }) => {
 
             axios.post(`${ApiURL}/student`, {
@@ -49,7 +52,7 @@ export default function StudentsList() {
                   .then(res => {
                         console.log(res.data)
                         getAlldataStudent()
-
+                        clearstate();
                   })
       }
 

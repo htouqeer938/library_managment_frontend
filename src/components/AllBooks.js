@@ -43,6 +43,7 @@ export default function BooksList() {
             getAlldataBook();
       }, []);
 
+      const clearstate = () => getdata([])
 
       const addBook = ({ book_name,
             author,
@@ -60,6 +61,7 @@ export default function BooksList() {
                   .then(res => {
                         console.log(res.data)
                         getAlldataBook();
+                        clearstate();
                   })
       }
 
