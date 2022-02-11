@@ -21,22 +21,24 @@ const AddStudent = ({ formData }) => {
 
 
       return (
-            <FormControl>
-                  <FormGroup>
-                        <Input onChange={(e) => handle(e)} value={data.first_name} id="first_name" aria-describedby="first_name-text" />
-                        <FormHelperText id="first_name-text">Enter first name.</FormHelperText>
-                  </FormGroup>
-                  <FormGroup>
-                        <Input onChange={(e) => handle(e)} value={data.last_name} id="last_name" aria-describedby="last_name-text" />
-                        <FormHelperText id="last_name-text">Enter Last Name.</FormHelperText>
-                  </FormGroup>
-                  <FormGroup>
-                        <Button onClick={(e) => {
-                              e.preventDefault();
-                              submit()
-                        }} variant="outlined">Add Student</Button>
-                  </FormGroup>
-            </FormControl>
+            <form onSubmit={(e) => {
+                  e.preventDefault();
+                  submit()
+            }}>
+                  <FormControl fullWidth>
+                        <FormGroup>
+                              <Input required onChange={(e) => handle(e)} value={data.first_name} id="first_name" aria-describedby="first_name-text" />
+                              <FormHelperText id="first_name-text">Enter first name.</FormHelperText>
+                        </FormGroup>
+                        <FormGroup>
+                              <Input required onChange={(e) => handle(e)} value={data.last_name} id="last_name" aria-describedby="last_name-text" />
+                              <FormHelperText id="last_name-text">Enter Last Name.</FormHelperText>
+                        </FormGroup>
+                        <FormGroup>
+                              <Button type="submit" variant="outlined">Add Student</Button>
+                        </FormGroup>
+                  </FormControl>
+            </form>
       );
 };
 
