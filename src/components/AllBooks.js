@@ -179,6 +179,7 @@ export default function BooksList() {
                                     <TableCell style={{ fontWeight: 600 }}>Borrowed by Student</TableCell>
                                     <TableCell style={{ fontWeight: 600 }}>Borrow Date</TableCell>
                                     <TableCell style={{ fontWeight: 600 }}>Expected Date Return</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Actions</TableCell>
                               </TableRow>
                         </TableHead>
                         <TableBody>
