@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup, Select, MenuItem } from '@mui/material';
 import axios from "axios";
 import ApiURL from "../config";
 import Title from "./Title";
 
-const AddBook = ({ formData }) => {
+const EditBook = ({ formData, bookDetail }) => {
 
       const [data, setData] = useState({
             book_name: "",
@@ -14,6 +14,10 @@ const AddBook = ({ formData }) => {
             expected_date_return: ""
       })
 
+      useEffect(() => {
+            setData({ ...bookDetail })
+      }, [bookDetail])
+
       function submit(e) {
             formData(data);
       }
@@ -22,8 +26,7 @@ const AddBook = ({ formData }) => {
             const newdata = { ...data }
             newdata[e.target.name] = e.target.value
             setData(newdata)
-            console.log(newdata)
-
+            // console.log(newdata)
       }
 
       const [studentdata, setStudentData] = React.useState([]);
@@ -47,7 +50,7 @@ const AddBook = ({ formData }) => {
                   submit()
             }}>
                   <FormControl fullWidth>
-                        <Title>Add New Book</Title>
+                        <Title>Edit Book</Title>
                         <FormGroup>
                               <Input onChange={(e) => handle(e)} value={data.book_name} name="book_name" aria-describedby="first_name-text" required />
                               <FormHelperText id="first_name-text">Enter book name</FormHelperText>
@@ -82,11 +85,11 @@ const AddBook = ({ formData }) => {
                               <FormHelperText id="first_name-text">Enter expected return Date</FormHelperText>
                         </FormGroup>
                         <FormGroup>
-                              <Button variant='contained' type="submit">Add Book</Button>
+                              <Button variant='contained' type="submit">Update Book</Button>
                         </FormGroup>
                   </FormControl>
             </form>
       );
 };
 
-export default AddBook;
+export default EditBook;

@@ -3,13 +3,15 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 import AddBook from './AddBookfrm'
-
+import EditBook from './EditBookfrm'
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import ApiURL from '../config';
@@ -36,8 +38,12 @@ export default function BooksList() {
       const handleOpen = () => setOpen(true);
       const handleClose = () => setOpen(false);
 
+      const [openedit, setOpenedit] = React.useState(false);
+      const handleOpenedit = () => setOpenedit(true);
+      const handleCloseedit = () => setOpenedit(false);
 
       const [Bookdata, getdata] = React.useState([]);
+      const [bookDetail, setBookDetail] = React.useState({});
 
       React.useEffect(() => {
             getAlldataBook();
@@ -65,10 +71,58 @@ export default function BooksList() {
                   })
       }
 
+      const updateBook = ({
+            id,
+            book_name,
+            author,
+            borrowed_by_student,
+            date_of_borrow,
+            expected_date_return
+      }) => {
+            axios.put(`${ApiURL}/book/${id}`, {
+                  book_name,
+                  author,
+                  borrowed_by_student,
+                  date_of_borrow,
+                  expected_date_return
+            })
+                  .then(res => {
+                        console.log(res.data)
+                        getAlldataBook()
+                        clearstate();
+                  })
+      }
+
       const getAlldataBook = () => {
             axios.get(`${ApiURL}/book`)
                   .then(({ data }) => {
                         getdata(data);
+                  })
+                  .catch(error => console.error(`Error`, error))
+      }
+
+      const getBookByID = (id) => {
+            axios.get(`${ApiURL}/book/${id}`)
+                  .then(({ data }) => {
+                        // console.log(data)
+                        setBookDetail(data);
+                  })
+                  .catch(error => console.error(`Error`, error))
+      }
+
+      const editModal = (id) => {
+            getBookByID(id);
+            // if (Object.entries(studentDetail).length > 0) {
+            handleOpenedit();
+            // }
+      }
+
+      const deleteBook = (id) => {
+            axios.delete(`${ApiURL}/book/${id}`)
+                  .then(() => {
+                        console.log('Delete successful');
+                        getAlldataBook()
+                        clearstate();
                   })
                   .catch(error => console.error(`Error`, error))
       }
@@ -103,6 +157,20 @@ export default function BooksList() {
                   </Modal>
 
 
+                  <Modal
+                        keepMounted
+                        open={openedit}
+                        onClose={handleCloseedit}
+                        aria-labelledby="keep-mounted-modal-title"
+                        aria-describedby="keep-mounted-modal-description"
+                  >
+                        <Box sx={{ ...style, width: 400 }}>
+                              < EditBook bookDetail={bookDetail} formData={(data) => {
+                                    updateBook(data)
+                              }} />
+                        </Box>
+                  </Modal>
+
                   <Table size="small">
                         <TableHead>
                               <TableRow>
@@ -121,6 +189,10 @@ export default function BooksList() {
                                           <TableCell>{row.borrowed_by_student}</TableCell>
                                           <TableCell>{row.date_of_borrow}</TableCell>
                                           <TableCell>{row.expected_date_return}</TableCell>
+                                          <TableCell>
+                                                <EditIcon onClick={() => editModal(row.id)} />
+                                                <DeleteIcon onClick={() => deleteBook(row.id)} />
+                                          </TableCell>
                                     </TableRow>
                               ))}
                         </TableBody>
