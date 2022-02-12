@@ -3,6 +3,7 @@ import { FormControl, Button, Input, FormHelperText, FormGroup, Select, MenuItem
 import axios from "axios";
 import ApiURL from "../config";
 import Title from "./Title";
+import moment from "moment";
 
 const EditBook = ({ formData, bookDetail }) => {
 
@@ -15,7 +16,11 @@ const EditBook = ({ formData, bookDetail }) => {
       })
 
       useEffect(() => {
-            setData({ ...bookDetail })
+            setData({
+                  ...bookDetail,
+                  ['date_of_borrow']: moment(bookDetail.date_of_borrow).format('YYYY-MM-DD'),
+                  ['expected_date_return']: moment(bookDetail.expected_date_return).format('YYYY-MM-DD')
+            })
       }, [bookDetail])
 
       function submit(e) {
@@ -55,10 +60,19 @@ const EditBook = ({ formData, bookDetail }) => {
                               <Input onChange={(e) => handle(e)} value={data.book_name} name="book_name" aria-describedby="first_name-text" required />
                               <FormHelperText id="first_name-text">Enter book name</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Input onChange={(e) => handle(e)} value={data.author} name="author" aria-describedby="last_name-text" required />
                               <FormHelperText id="last_name-text">Enter author</FormHelperText>
                         </FormGroup>
+
+                  </FormControl>
+
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               {/* <Input onChange={(e) => handle(e)} value={data.borrowed_by_student} id="borrowed_by_student" aria-describedby="first_name-text" /> */}
                               <Select
@@ -76,19 +90,31 @@ const EditBook = ({ formData, bookDetail }) => {
                               </Select>
                               <FormHelperText id="first_name-text">Enter borrowed student</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Input required type="date" onChange={(e) => handle(e)} value={data.date_of_borrow} name="date_of_borrow" aria-describedby="last_name-text" />
                               <FormHelperText id="last_name-text">Enter borrow date</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Input required type="date" onChange={(e) => handle(e)} value={data.expected_date_return} name="expected_date_return" aria-describedby="first_name-text" />
                               <FormHelperText id="first_name-text">Enter expected return Date</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Button variant='contained' type="submit">Update Book</Button>
                         </FormGroup>
                   </FormControl>
-            </form>
+            </form >
       );
 };
 

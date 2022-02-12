@@ -27,12 +27,12 @@ export default function StudentsCount() {
     <React.Fragment>
       <Title>Total Students</Title>
       <Typography component="p" variant="h4">
-        {studentdata.map((i) => (
-          <div>{i.count}</div>
+        {studentdata.map(({ count }, index) => (
+          <span key={index}>{count}</span>
         ))}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        {Date().toLocaleString()}
+        {/* {Date().toLocaleString()} */}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={() => { history.push("/students") }}>

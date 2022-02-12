@@ -114,7 +114,7 @@ function BooksContent() {
                                           noWrap
                                           sx={{ flexGrow: 1 }}
                                     >
-                                          Books
+                                          Issued Books
                                     </Typography>
                               </Toolbar>
                         </AppBar>

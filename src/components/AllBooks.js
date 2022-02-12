@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import ApiURL from '../config';
 import { Grid } from '@mui/material';
+import moment from 'moment'
 
 const style = {
       position: 'absolute',
@@ -131,11 +132,11 @@ export default function BooksList() {
             <React.Fragment>
                   <Grid container spacing={2}>
                         <Grid item alignItems={"start"} lg={6} md={6}>
-                              <Title>Books List</Title>
+                              <Title>Issued Books List</Title>
                         </Grid>
                         <Grid item alignItems={"end"} sx={{ textAlign: "end" }} lg={6} md={6}>
                               <Button onClick={handleOpen} variant='contained' startIcon={<AddIcon />}>
-                                    Add Book
+                                    Isuue Book
                               </Button>
                         </Grid>
 
@@ -188,8 +189,8 @@ export default function BooksList() {
                                           <TableCell>{row.book_name}</TableCell>
                                           <TableCell>{row.author}</TableCell>
                                           <TableCell>{row.borrowed_by_student}</TableCell>
-                                          <TableCell>{row.date_of_borrow}</TableCell>
-                                          <TableCell>{row.expected_date_return}</TableCell>
+                                          <TableCell>{moment(row.date_of_borrow).format('YYYY-MM-DD')}</TableCell>
+                                          <TableCell>{moment(row.expected_date_return).format('YYYY-MM-DD')}</TableCell>
                                           <TableCell>
                                                 <EditIcon onClick={() => editModal(row.id)} />
                                                 <DeleteIcon onClick={() => deleteBook(row.id)} />

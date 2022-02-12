@@ -26,16 +26,23 @@ const AddStudent = ({ formData }) => {
                   e.preventDefault();
                   submit()
             }}>
+                  <Title>Add New Student</Title>
                   <FormControl fullWidth>
-                        <Title>Add New Student</Title>
+
                         <FormGroup>
                               <Input required onChange={(e) => handle(e)} value={data.first_name} id="first_name" aria-describedby="first_name-text" />
                               <FormHelperText id="first_name-text">Enter first name.</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Input required onChange={(e) => handle(e)} value={data.last_name} id="last_name" aria-describedby="last_name-text" />
                               <FormHelperText id="last_name-text">Enter Last Name.</FormHelperText>
                         </FormGroup>
+                  </FormControl>
+                  <FormControl fullWidth>
+
                         <FormGroup>
                               <Button type="submit" variant='contained'>Add Student</Button>
                         </FormGroup>

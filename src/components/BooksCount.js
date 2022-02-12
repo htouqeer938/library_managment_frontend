@@ -28,16 +28,16 @@ export default function BooksCount() {
             <React.Fragment>
                   <Title>Books Issued</Title>
                   <Typography component="p" variant="h4">
-                        {bookdata.map((i) => (
-                              <div>{i.count}</div>
+                        {bookdata.map(({ count }, index) => (
+                              <span key={index}>{count}</span>
                         ))}
                   </Typography>
                   <Typography color="text.secondary" sx={{ flex: 1 }}>
-                        {Date().toLocaleString()}
+                        {/* {moment()} */}
                   </Typography>
                   <div>
                         <Link color="primary" href="#" onClick={() => { history.push("/books") }}>
-                              View Books
+                              View Books Issued
                         </Link>
                   </div>
             </React.Fragment>
