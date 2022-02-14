@@ -18,8 +18,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 
 import { MainListItems } from './listItems';
-import StudentsCount from './StudentsCount';
-import BooksCount from './BooksCount';
+import StudentsCount from './Students/StudentsCount';
+import BooksCount from './IssueBooks/IssueBooksCount';
 
 function Copyright(props) {
   return (

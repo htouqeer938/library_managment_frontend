@@ -15,8 +15,8 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { MainListItems } from './listItems';
-import BooksList from './AllBooks';
+import { MainListItems } from '../listItems';
+import BooksList from './AllIssueBooks';
 
 function Copyright(props) {
       return (

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import Title from './Title';
+import Title from '../Title';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import ApiURL from '../config';
+import ApiURL from '../../config';
 
 export default function StudentsCount() {
   const history = useHistory()

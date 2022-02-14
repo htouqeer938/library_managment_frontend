@@ -32,7 +32,7 @@ export const MainListItems = () => {
       <ListItemIcon>
         <MenuBookIcon />
       </ListItemIcon>
-      <ListItemText primary="Books" />
+      <ListItemText primary="Issued Books" />
     </ListItemButton>
   </React.Fragment >
   )

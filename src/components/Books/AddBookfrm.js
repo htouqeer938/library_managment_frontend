@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup, Select, MenuItem } from '@mui/material';
 import axios from "axios";
-import ApiURL from "../config";
-import Title from "./Title";
+import ApiURL from "../../config";
+import Title from "../Title";
 import moment from "moment";
 
 const AddBook = ({ formData }) => {

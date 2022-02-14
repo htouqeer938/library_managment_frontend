@@ -1,20 +1,22 @@
 import React from 'react';
-import { Table, Grid } from '@mui/material';
+import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import Title from './Title';
-import AddStudent from './AddStudentfrm';
-import EditStudent from './EditStudent';
+import TableRow from '@mui/material/TableRow';
+import Title from '../Title';
+import AddBook from './AddIssueBookfrm'
+import EditBook from './EditIssueBookfrm'
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import ApiURL from '../config';
+import ApiURL from '../../config';
+import { Grid } from '@mui/material';
+import moment from 'moment'
 
 const style = {
       position: 'absolute',
@@ -30,7 +32,8 @@ const style = {
       pb: 3,
 };
 
-export default function StudentsList() {
+export default function BooksList() {
+
 
       const [open, setOpen] = React.useState(false);
       const handleOpen = () => setOpen(true);
@@ -40,90 +43,105 @@ export default function StudentsList() {
       const handleOpenedit = () => setOpenedit(true);
       const handleCloseedit = () => setOpenedit(false);
 
-
-      const [studentdata, setStudentData] = React.useState([]);
-
-      const [studentDetail, setStudentDetail] = React.useState({});
-
+      const [Bookdata, getdata] = React.useState([]);
+      const [bookDetail, setBookDetail] = React.useState({});
 
       React.useEffect(() => {
-            getAlldataStudent();
+            getAlldataBook();
       }, []);
 
-      const clearstate = () => setStudentData([])
+      const clearstate = () => getdata([])
 
-      const addStudent = ({ first_name, last_name }) => {
-            axios.post(`${ApiURL}/student`, {
-                  first_name,
-                  last_name
+      const addBook = ({ book_name,
+            author,
+            borrowed_by_student,
+            date_of_borrow,
+            expected_date_return
+      }) => {
+            axios.post(`${ApiURL}/book`, {
+                  book_name,
+                  author,
+                  borrowed_by_student,
+                  date_of_borrow,
+                  expected_date_return
             })
                   .then(res => {
                         console.log(res.data)
-                        getAlldataStudent()
+                        getAlldataBook();
                         clearstate();
                   })
       }
 
-      const updatestudent = ({ id, first_name, last_name }) => {
-            axios.put(`${ApiURL}/student/${id}`, {
-                  first_name,
-                  last_name
+      const updateBook = ({
+            id,
+            book_name,
+            author,
+            borrowed_by_student,
+            date_of_borrow,
+            expected_date_return
+      }) => {
+            axios.put(`${ApiURL}/book/${id}`, {
+                  book_name,
+                  author,
+                  borrowed_by_student,
+                  date_of_borrow,
+                  expected_date_return
             })
                   .then(res => {
                         console.log(res.data)
-                        getAlldataStudent()
+                        getAlldataBook()
                         clearstate();
                   })
       }
 
-      const getAlldataStudent = () => {
-            axios.get(`${ApiURL}/student`)
+      const getAlldataBook = () => {
+            axios.get(`${ApiURL}/book`)
                   .then(({ data }) => {
-                        setStudentData(data);
+                        getdata(data);
                   })
                   .catch(error => console.error(`Error`, error))
       }
 
-      const getStudentByID = (id) => {
-            axios.get(`${ApiURL}/student/${id}`)
+      const getBookByID = (id) => {
+            axios.get(`${ApiURL}/book/${id}`)
                   .then(({ data }) => {
                         // console.log(data)
-                        setStudentDetail(data);
+                        setBookDetail(data);
                   })
                   .catch(error => console.error(`Error`, error))
       }
 
-      const editmodal = (id) => {
-            getStudentByID(id);
+      const editModal = (id) => {
+            getBookByID(id);
             // if (Object.entries(studentDetail).length > 0) {
             handleOpenedit();
             // }
       }
 
-      const deleteStudent = (id) => {
-            axios.delete(`${ApiURL}/student/${id}`)
+      const deleteBook = (id) => {
+            axios.delete(`${ApiURL}/book/${id}`)
                   .then(() => {
                         console.log('Delete successful');
-                        getAlldataStudent()
+                        getAlldataBook()
                         clearstate();
                   })
                   .catch(error => console.error(`Error`, error))
       }
+
       return (
-            <React.Fragment >
-
-
+            <React.Fragment>
                   <Grid container spacing={2}>
                         <Grid item alignItems={"start"} lg={6} md={6}>
-                              <Title>Students List</Title>
+                              <Title>Issued Books List</Title>
                         </Grid>
                         <Grid item alignItems={"end"} sx={{ textAlign: "end" }} lg={6} md={6}>
                               <Button onClick={handleOpen} variant='contained' startIcon={<AddIcon />}>
-                                    Add Student
+                                    Isuue Book
                               </Button>
                         </Grid>
 
                   </Grid>
+
 
                   <Modal
                         keepMounted
@@ -133,8 +151,8 @@ export default function StudentsList() {
                         aria-describedby="keep-mounted-modal-description"
                   >
                         <Box sx={{ ...style, width: 400 }}>
-                              <AddStudent formData={(data) => {
-                                    addStudent(data)
+                              <AddBook formData={(data) => {
+                                    addBook(data)
                               }} />
                         </Box>
                   </Modal>
@@ -148,29 +166,34 @@ export default function StudentsList() {
                         aria-describedby="keep-mounted-modal-description"
                   >
                         <Box sx={{ ...style, width: 400 }}>
-                              <EditStudent studentDetail={studentDetail} formData={(data) => {
-                                    updatestudent(data)
+                              < EditBook bookDetail={bookDetail} formData={(data) => {
+                                    updateBook(data)
                               }} />
                         </Box>
                   </Modal>
 
-
                   <Table size="small">
                         <TableHead>
                               <TableRow>
-                                    <TableCell style={{ fontWeight: 600 }}>First Name</TableCell>
-                                    <TableCell style={{ fontWeight: 600 }}>Last Name</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Book Name</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Author</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Borrowed by Student</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Borrow Date</TableCell>
+                                    <TableCell style={{ fontWeight: 600 }}>Expected Date Return</TableCell>
                                     <TableCell style={{ fontWeight: 600 }}>Actions</TableCell>
                               </TableRow>
                         </TableHead>
                         <TableBody>
-                              {studentdata.map((row) => (
+                              {Bookdata.map((row) => (
                                     <TableRow key={row.id}>
-                                          <TableCell>{row.first_name}</TableCell>
-                                          <TableCell>{row.last_name}</TableCell>
+                                          <TableCell>{row.book_name}</TableCell>
+                                          <TableCell>{row.author}</TableCell>
+                                          <TableCell>{row.borrowed_by_student}</TableCell>
+                                          <TableCell>{moment(row.date_of_borrow).format('YYYY-MM-DD')}</TableCell>
+                                          <TableCell>{moment(row.expected_date_return).format('YYYY-MM-DD')}</TableCell>
                                           <TableCell>
-                                                <EditIcon onClick={() => editmodal(row.id)} />
-                                                <DeleteIcon onClick={() => deleteStudent(row.id)} />
+                                                <EditIcon onClick={() => editModal(row.id)} />
+                                                <DeleteIcon onClick={() => deleteBook(row.id)} />
                                           </TableCell>
                                     </TableRow>
                               ))}

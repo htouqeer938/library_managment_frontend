@@ -1,27 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup, Select, MenuItem } from '@mui/material';
 import axios from "axios";
-import ApiURL from "../config";
-import Title from "./Title";
+import ApiURL from "../../config";
+import Title from "../Title";
 import moment from "moment";
 
-const EditBook = ({ formData, bookDetail }) => {
+const AddBook = ({ formData }) => {
 
       const [data, setData] = useState({
             book_name: "",
             author: "",
             borrowed_by_student: "",
-            date_of_borrow: "",
-            expected_date_return: ""
+            date_of_borrow: moment().format('YYYY-MM-DD'),
+            expected_date_return: moment().format('YYYY-MM-DD')
       })
-
-      useEffect(() => {
-            setData({
-                  ...bookDetail,
-                  ['date_of_borrow']: moment(bookDetail.date_of_borrow).format('YYYY-MM-DD'),
-                  ['expected_date_return']: moment(bookDetail.expected_date_return).format('YYYY-MM-DD')
-            })
-      }, [bookDetail])
 
       function submit(e) {
             formData(data);
@@ -31,7 +23,8 @@ const EditBook = ({ formData, bookDetail }) => {
             const newdata = { ...data }
             newdata[e.target.name] = e.target.value
             setData(newdata)
-            // console.log(newdata)
+            console.log(newdata)
+
       }
 
       const [studentdata, setStudentData] = React.useState([]);
@@ -54,23 +47,21 @@ const EditBook = ({ formData, bookDetail }) => {
                   e.preventDefault();
                   submit()
             }}>
+                  <Title>Issue New Book</Title>
                   <FormControl fullWidth>
-                        <Title>Edit Book</Title>
+
                         <FormGroup>
                               <Input onChange={(e) => handle(e)} value={data.book_name} name="book_name" aria-describedby="first_name-text" required />
                               <FormHelperText id="first_name-text">Enter book name</FormHelperText>
                         </FormGroup>
                   </FormControl>
-
                   <FormControl fullWidth>
 
                         <FormGroup>
                               <Input onChange={(e) => handle(e)} value={data.author} name="author" aria-describedby="last_name-text" required />
                               <FormHelperText id="last_name-text">Enter author</FormHelperText>
                         </FormGroup>
-
                   </FormControl>
-
                   <FormControl fullWidth>
 
                         <FormGroup>
@@ -83,15 +74,12 @@ const EditBook = ({ formData, bookDetail }) => {
                                     required
                               >
                                     {studentdata.map((student) => (
-
                                           <MenuItem key={student.id} value={student.first_name}>{student.first_name}</MenuItem>
-
                                     ))}
                               </Select>
                               <FormHelperText id="first_name-text">Enter borrowed student</FormHelperText>
                         </FormGroup>
                   </FormControl>
-
                   <FormControl fullWidth>
 
                         <FormGroup>
@@ -99,7 +87,6 @@ const EditBook = ({ formData, bookDetail }) => {
                               <FormHelperText id="last_name-text">Enter borrow date</FormHelperText>
                         </FormGroup>
                   </FormControl>
-
                   <FormControl fullWidth>
 
                         <FormGroup>
@@ -107,15 +94,14 @@ const EditBook = ({ formData, bookDetail }) => {
                               <FormHelperText id="first_name-text">Enter expected return Date</FormHelperText>
                         </FormGroup>
                   </FormControl>
-
                   <FormControl fullWidth>
 
                         <FormGroup>
-                              <Button variant='contained' type="submit">Update Book</Button>
+                              <Button variant='contained' type="submit">Issue Book</Button>
                         </FormGroup>
                   </FormControl>
-            </form >
+            </form>
       );
 };
 
-export default EditBook;
+export default AddBook;

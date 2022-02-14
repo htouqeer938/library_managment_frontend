@@ -9,12 +9,12 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title';
-import AddBook from './AddBookfrm'
-import EditBook from './EditBookfrm'
+import Title from '../Title';
+import AddBook from './AddIssueBookfrm'
+import EditBook from './EditIssueBookfrm'
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import ApiURL from '../config';
+import ApiURL from '../../config';
 import { Grid } from '@mui/material';
 import moment from 'moment'
 

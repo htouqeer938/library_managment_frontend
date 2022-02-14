@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormControl, Button, Input, FormHelperText, FormGroup } from '@mui/material';
-import Title from "./Title";
+import Title from "../Title";
 
 
-const AddStudent = ({ formData }) => {
+const EditStudent = ({ formData, studentDetail }) => {
 
-      const [data, setData] = useState({
-            first_name: "",
-            last_name: ""
-      })
+      const [data, setData] = useState([])
+
+
+      useEffect(() => {
+
+            setData({ ...studentDetail })
+
+      }, [studentDetail])
+
 
       function submit(e) {
             formData(data);
@@ -26,7 +31,7 @@ const AddStudent = ({ formData }) => {
                   e.preventDefault();
                   submit()
             }}>
-                  <Title>Add New Student</Title>
+                  <Title>Edit Student</Title>
                   <FormControl fullWidth>
 
                         <FormGroup>
@@ -40,15 +45,16 @@ const AddStudent = ({ formData }) => {
                               <Input required onChange={(e) => handle(e)} value={data.last_name} id="last_name" aria-describedby="last_name-text" />
                               <FormHelperText id="last_name-text">Enter Last Name.</FormHelperText>
                         </FormGroup>
+
                   </FormControl>
                   <FormControl fullWidth>
 
                         <FormGroup>
-                              <Button type="submit" variant='contained'>Add Student</Button>
+                              <Button type="submit" variant='contained'>Update Student</Button>
                         </FormGroup>
                   </FormControl>
             </form>
       );
 };
 
-export default AddStudent;
+export default EditStudent;

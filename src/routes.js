@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Components
 import Dashboard from "./components/Dashboard";
-import Students from './components/Students';
-import Books from './components/Book';
+import Students from './components/Students/Students';
+import Books from './components/IssueBooks/IssueBook';
 
 const Routes = () => {
       return (

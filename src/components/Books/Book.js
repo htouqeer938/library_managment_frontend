@@ -15,8 +15,8 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { MainListItems } from './listItems';
-import StudentsList from './AllStudents';
+import { MainListItems } from '../listItems';
+import BooksList from './AllIssueBooks';
 
 function Copyright(props) {
       return (
@@ -79,7 +79,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-function StudentsContent() {
+function BooksContent() {
       const [open, setOpen] = React.useState(true);
       const toggleDrawer = () => {
             setOpen(!open);
@@ -114,7 +114,7 @@ function StudentsContent() {
                                           noWrap
                                           sx={{ flexGrow: 1 }}
                                     >
-                                          Students
+                                          Issued Books
                                     </Typography>
                               </Toolbar>
                         </AppBar>
@@ -134,9 +134,7 @@ function StudentsContent() {
                               <Divider />
                               <List component="nav">
                                     {<MainListItems />}
-
                                     <Divider sx={{ my: 1 }} />
-                                    {/* {secondaryListItems} */}
                               </List>
                         </Drawer>
                         <Box
@@ -154,24 +152,11 @@ function StudentsContent() {
                               <Toolbar />
                               <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                                     <Grid container spacing={3}>
-
-
-                                          {/* <Grid item xs={12}>
-                                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                                      <AddStudent formData={(data) => {
-                                                            addStudent(data)
-                                                      }} />
-                                                </Paper>
-                                          </Grid> */}
-
                                           <Grid item xs={12}>
                                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                                      <StudentsList />
+                                                      <BooksList />
                                                 </Paper>
                                           </Grid>
-
-
-
                                     </Grid>
                                     <Copyright sx={{ pt: 4 }} />
                               </Container>
@@ -181,6 +166,6 @@ function StudentsContent() {
       );
 }
 
-export default function Students() {
-      return <StudentsContent />;
+export default function Books() {
+      return <BooksContent />;
 }
