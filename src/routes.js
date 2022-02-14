@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Components
 import Dashboard from "./components/Dashboard";
 import Students from './components/Students/Students';
-import Books from './components/IssueBooks/IssueBook';
+import IssueBooks from './components/IssueBooks/IssueBook';
+// import Books from './components/Books/Book';
 
 const Routes = () => {
       return (
@@ -13,7 +14,8 @@ const Routes = () => {
                         <Switch>
                               <Route exact path={"/"} component={Dashboard} />
                               <Route exact path={"/students"} component={Students} />
-                              <Route exact path={"/books"} component={Books} />
+                              <Route exact path={"/books"} component={IssueBooks} />
+                              {/* <Route exact path={"/cdd"} /> */}
                         </Switch>
                   </Router>
             </div>

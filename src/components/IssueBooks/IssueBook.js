@@ -166,6 +166,6 @@ function BooksContent() {
       );
 }
 
-export default function Books() {
+export default function IssueBooks() {
       return <BooksContent />;
 }
